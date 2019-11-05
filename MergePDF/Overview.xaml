@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="MergePDF.Overview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MergePDF"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="400" Margin="0,0,20,0">
+
+    <StackPanel  Orientation="Vertical" MaxWidth="400" Background="White">
+        <TextBlock FontSize="18" FontFamily="Segone UI" Margin="0,0,20,0">Dateiübersicht</TextBlock>
+        <ListView x:Name="listview" MinWidth="100" Padding="5, 5, 5, 5"/>
+        <StackPanel Orientation="Horizontal">
+            <CheckBox x:Name="checkbox" Margin="-1,2,0,0" ></CheckBox>
+            <TextBlock Text="Veröffentlichen" Margin="3,1,0,0"></TextBlock>
+        </StackPanel>
+        <Button x:Name="btn_merge" Content="zusammenfügen"  Margin="0,20,0,0" Click="btn_merge_Click"/>
+        
+    </StackPanel>
+</UserControl>
