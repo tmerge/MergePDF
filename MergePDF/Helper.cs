@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 
@@ -17,6 +13,11 @@ namespace MergePDF
         }
 
 
+        /// <summary>
+        ///     this method merge a list of pdf documents to one
+        /// </summary>
+        /// <param name="pdfDocuments"></param>
+        /// <returns>merged pdf document</returns>
         public PdfDocument mergePdf(List<PdfDocument> pdfDocuments)
         {
             PdfDocument tmp = new PdfDocument();
@@ -30,6 +31,11 @@ namespace MergePDF
             return tmp;
         }
 
+        /// <summary>
+        ///     this method generates a list of pdf documents from list of paths
+        /// </summary>
+        /// <param name="paths"></param>
+        /// <returns>list of pdf documents</returns>
         public List<PdfDocument> getPdfDocuments(List<string> paths)
         {
             List<PdfDocument> pdfDocuments = new List<PdfDocument>();
@@ -44,7 +50,6 @@ namespace MergePDF
 
         public void savePdf(PdfDocument pdfDocument, string path)
         {
-            string test = path;
             pdfDocument.Save(path);
         }
     }
