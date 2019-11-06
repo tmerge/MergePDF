@@ -1,16 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using System.Windows.Forms;
+using System.Windows.Controls;
+using Microsoft.Win32;
 
 namespace MergePDF
 {
     /// <summary>
     /// Interaktionslogik für Overview.xaml
     /// </summary>
-    public partial class Overview : System.Windows.Controls.UserControl
+    public partial class Overview : UserControl
     {
         public List<string> filesToMerge { get; set; }
         private Helper helper;
@@ -23,17 +25,30 @@ namespace MergePDF
             btn_merge.IsEnabled = false;
             filesToMerge = new List<string>();
             // set itemsource 
+            listview.MouseDoubleClick += Listview_MouseDoubleClick;
             listview.ItemsSource = filesToMerge;
             ((INotifyCollectionChanged)listview.Items).CollectionChanged += Overview_CollectionChanged;
         }
 
+        // remove item on double click 
+        private void Listview_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (filesToMerge.Contains((string)listview.SelectedItem))
+            {
+                filesToMerge.Remove((string)listview.SelectedItem);
+                listview.Items.Refresh();
+            }
+        }
+
         private void Overview_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            //TODO: 
-            // - implement functionaltiy in case of remove item
             if (listview.Items.Count > 1)
             {
                 btn_merge.IsEnabled = true;
+            }
+            else
+            {
+                btn_merge.IsEnabled = false;
             }
         }
 
@@ -50,7 +65,10 @@ namespace MergePDF
                 FilterIndex = 1,
                 CheckPathExists = true
             };
-            if (sfd.ShowDialog() == DialogResult.OK)
+
+            // temporary save nullable dialogresult
+            Nullable<bool> dialogresult = sfd.ShowDialog();
+            if (dialogresult == true)
             {
                 helper.savePdf(helper.mergePdf(helper.getPdfDocuments(filesToMerge)), sfd.FileName);
                 if (checkbox.IsChecked == true)
