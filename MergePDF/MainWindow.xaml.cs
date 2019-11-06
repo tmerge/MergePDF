@@ -50,11 +50,9 @@ namespace MergePDF
         }
 
 
+        // on mouse down event open file dialog to open files
         private void dropzone_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //TODO:
-            // - check if list count is larger than 0 before adding overview
-
             OpenFileDialog ofd = new OpenFileDialog();
 
             ofd.InitialDirectory = Directory.GetCurrentDirectory();
@@ -68,6 +66,7 @@ namespace MergePDF
             ofd.Multiselect = true;
             //show dialog
             ofd.ShowDialog();
+            
 
             foreach (string file in ofd.FileNames)
             {
@@ -79,20 +78,12 @@ namespace MergePDF
             {
                 addOverviewToWindow();
             }
-
-
-            //MessageBox.Show("implement me, i'm mouse down");
         }
 
+        // add new control to window
         private void addOverviewToWindow()
         {
-            //TODO: 
-            // - cleanup and outsource it to events and maybe a whole control
-            // - textbox for destitnation?
-            // - outsource every functionality to Overview
-
             //edit dropzone property
-
             if (!maingrid.Children.Contains(overview))
             {
                 dropzone.Height = 380;
