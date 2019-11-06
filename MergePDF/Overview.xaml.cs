@@ -29,10 +29,12 @@ namespace MergePDF
 
         private void Overview_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            //TODO:
-            // - enable button after more than one element is in list   
-
-            btn_merge.IsEnabled = true;
+            //TODO: 
+            // - implement functionaltiy in case of remove item
+            if (listview.Items.Count > 1)
+            {
+                btn_merge.IsEnabled = true;
+            }
         }
 
         private void btn_merge_Click(object sender, RoutedEventArgs e)
