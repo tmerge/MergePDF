@@ -15,7 +15,7 @@ namespace MergePDF
     public partial class Overview : UserControl
     {
         public List<string> filesToMerge { get; set; }
-        private Helper helper;
+        private readonly Helper helper;
 
         public Overview()
         {
@@ -44,10 +44,12 @@ namespace MergePDF
         {
             if (listview.Items.Count > 1)
             {
+                checkbox.IsEnabled = true;
                 btn_merge.IsEnabled = true;
             }
             else
             {
+                checkbox.IsEnabled = false;
                 btn_merge.IsEnabled = false;
             }
         }
